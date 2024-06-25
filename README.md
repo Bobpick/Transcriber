@@ -1,6 +1,7 @@
 # Transcriber
 Transcriber is a Python program that converts audio and video files into text, then utilizes AI via the Ollama LLM and an uncensored model to refine the transcription and save the cleaned output as a PDF.
 
+[![(Image](https://github.com/Bobpick/Transcriber/blob/main/_95e668c3-201b-48a5-94d5-97f8d97efb58.jpg)](https://github.com/Bobpick/Transcriber/blob/main/_95e668c3-201b-48a5-94d5-97f8d97efb58.jpg)
 ## Features
 
 - Supports various media formats (MP4, MP3, MPEG, WAV)
