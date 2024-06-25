@@ -42,16 +42,25 @@ def transcribe_audio(audio_path: str) -> str:
     with sr.AudioFile(audio_path) as source:
         audio = recognizer.record(source)
         return recognizer.recognize_google(audio)
-
 def clean_transcription(text: str) -> str:
     prompt = f"""
-    Please clean up the following transcription by removing filler words, 
-    repetitions, and other distracting phrases. Maintain the original meaning 
-    and content, but make it more readable and professional:
+    Enhance the following transcription for clarity, accuracy, and professional use:
 
     {text}
 
-    Cleaned transcription:
+    Please perform the following tasks:
+
+    1. Remove filler words (e.g., "um," "uh," "like"), false starts, and stutters.
+    2. Correct any grammatical errors and misspellings.
+    3. Clarify ambiguous phrases or complete any incomplete sentences while maintaining the original meaning.
+    4. Ensure the transcription accurately reflects the spoken content without altering the core message.
+    5. Improve overall readability and flow of the text.
+    6. Format the text into coherent paragraphs if necessary.
+    7. Retain any technical terms, proper nouns, or specific jargon relevant to the topic.
+
+    Provide the enhanced transcription below, maintaining a professional tone suitable for formal documentation or publication.
+
+    Enhanced transcription:
     """
 
     response = requests.post("http://localhost:11434/api/generate", 
@@ -66,7 +75,6 @@ def clean_transcription(text: str) -> str:
         return result['response'].strip()
     else:
         raise Exception(f"Error in Ollama API call: {response.status_code} - {response.text}")
-
 def paginate_text(text: str, max_chars_per_page: int) -> List[str]:
     words = text.split()
     pages = []
